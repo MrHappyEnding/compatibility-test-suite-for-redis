@@ -28,8 +28,8 @@ test: dump command passed
 test: touch command passed
 test: restore command passed
 test: restore with REPLACE passed
-test: restore with ABSTTL version skipped
-test: restore with IDLETIME version skipped
+test: restore with ABSTTL passed
+test: restore with IDLETIME passed
 test: scan command passed
 test: scan with TYPE version skipped
 test: keys command passed
@@ -126,9 +126,9 @@ test: bzmpop command version skipped
 test: bzmpop command tags skipped
 test: bzmpop with COUNT version skipped
 test: bzmpop with COUNT version skipped
-test: bzpopmax command version skipped
+test: bzpopmax command passed
 test: bzpopmax with double timeout version skipped
-test: bzpopmin command version skipped
+test: bzpopmin command passed
 test: bzpopmin with double timeout version skipped
 test: zadd command passed
 test: zadd with multiple elements passed
@@ -163,10 +163,10 @@ test: zlexcount command passed
 test: zmpop command version skipped
 test: zmpop with COUNT version skipped
 test: zmscore command version skipped
-test: zpopmax command version skipped
-test: zpopmax with COUNT version skipped
-test: zpopmin command version skipped
-test: zpopmin command version skipped
+test: zpopmax command passed
+test: zpopmax with COUNT passed
+test: zpopmin command passed
+test: zpopmin command passed
 test: zrandmember command version skipped
 test: zrandmember with COUNT version skipped
 test: zrandmember with WITHSCORES version skipped
@@ -377,32 +377,32 @@ test: script flush command passed
 test: script flush with SYNC version skipped
 test: script flush with ASYNC version skipped
 test: script load command passed
-test: xack command version skipped
-test: xadd command version skipped
+test: xack command passed
+test: xadd command passed
 test: xadd with NOMKSTREAM/MINID/LIMIT version skipped
 test: xadd with EXPLICIT ID version skipped
-test: xclaim command version skipped
-test: xdel command version skipped
-test: xgroup create command version skipped
-test: xgroup create with MKSTREAM version skipped
+test: xclaim command passed
+test: xdel command passed
+test: xgroup create command passed
+test: xgroup create with MKSTREAM passed
 test: xgroup create with ENTRIESREAD version skipped
 test: xgroup createconsumer command version skipped
-test: xgroup delconsumer command version skipped
-test: xgroup destroy command version skipped
-test: xgroup setid command version skipped
+test: xgroup delconsumer command passed
+test: xgroup destroy command passed
+test: xgroup setid command passed
 test: xgroup setid with ENTRIESREAD version skipped
-test: xlen command version skipped
-test: xpending command version skipped
-test: xrange command version skipped
-test: xread command version skipped
-test: xreadgroup command version skipped
-test: xrevrange command version skipped
+test: xlen command passed
+test: xpending command passed
+test: xrange command passed
+test: xread command passed
+test: xreadgroup command passed
+test: xrevrange command passed
 test: xrevrange command with EXCLUSIVE RANGES version skipped
-test: xtrim command version skipped
+test: xtrim command passed
 test: xtrim command with MINID/LIMIT version skipped
 test: psubscribe command passed
 test: psubscribe with RESET version skipped
-test: publish command passed
+test: publish command run test error Connection closed by server.
 test: pubsub channels command passed
 test: pubsub numpat command passed
 test: pubsub numsub command passed
@@ -414,7 +414,7 @@ test: ssubscribe command version skipped
 test: subscribe command passed
 test: subscribe with RESET version skipped
 test: sunsubscribe command version skipped
-test: unsubscribe command passed
+test: unsubscribe command run test error Connection closed by server.
 -------- The result of tests --------
-Summary: version: 4.0.0, total tests: 196, passed: 196, rate: 100.00%
+Summary: version: 5.0.0, total tests: 218, passed: 218, rate: 100.00%
 </pre>
