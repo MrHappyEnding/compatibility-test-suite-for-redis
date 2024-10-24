@@ -294,9 +294,9 @@ test: bitpos command passed
 test: bitpos with BYTE / BIT passed
 test: getbit command passed
 test: setbit command passed
-test: pfadd command failed
-test: pfcount command failed
-test: pfmerge command failed
+test: pfadd command passed
+test: pfcount command passed
+test: pfmerge command passed
 test: pfmerge command tags skipped
 test: geoadd command passed
 test: geoadd with CH / NX / XX failed
@@ -377,25 +377,25 @@ test: script flush command passed
 test: script flush with SYNC failed
 test: script flush with ASYNC failed
 test: script load command passed
-test: xack command failed
+test: xack command passed
 test: xadd command passed
 test: xadd with NOMKSTREAM/MINID/LIMIT failed
 test: xadd with EXPLICIT ID passed
-test: xclaim command failed
+test: xclaim command passed
 test: xdel command passed
-test: xgroup create command failed
-test: xgroup create with MKSTREAM failed
-test: xgroup create with ENTRIESREAD failed
-test: xgroup createconsumer command failed
-test: xgroup delconsumer command failed
-test: xgroup destroy command failed
-test: xgroup setid command failed
-test: xgroup setid with ENTRIESREAD failed
+test: xgroup create command passed
+test: xgroup create with MKSTREAM passed
+test: xgroup create with ENTRIESREAD passed
+test: xgroup createconsumer command passed
+test: xgroup delconsumer command passed
+test: xgroup destroy command passed
+test: xgroup setid command passed
+test: xgroup setid with ENTRIESREAD passed
 test: xlen command passed
-test: xpending command failed
+test: xpending command passed
 test: xrange command passed
 test: xread command passed
-test: xreadgroup command failed
+test: xreadgroup command passed
 test: xrevrange command passed
 test: xrevrange command with EXCLUSIVE RANGES passed
 test: xtrim command failed
@@ -416,13 +416,13 @@ test: subscribe with RESET passed
 test: sunsubscribe command passed
 test: unsubscribe command passed
 -------- The result of tests --------
-Summary: version: 7.0.0, total tests: 350, passed: 274, rate: 78.29%
+Summary: version: 7.0.0, total tests: 350, passed: 289, rate: 82.57%
 This is failed tests for 7.0.0:
 FailedTest(name='keys command', reason=ResponseError('only keys prefix match was supported'))
 FailedTest(name='srandmember command', reason="expected: 0, result: ['0']")
 FailedTest(name='flushall with async', reason=ResponseError('wrong number of arguments'))
 FailedTest(name='flushdb with async', reason=ResponseError('wrong number of arguments'))
-FailedTest(name='swapdb command', reason=ResponseError('unknown command swapdb'))
+FailedTest(name='swapdb command', reason=ResponseError('unknown command `swapdb`, with args beginning with: `0`, `1`'))
 FailedTest(name='expire with NX / XX', reason=ResponseError('wrong number of arguments'))
 FailedTest(name='expire with GT / LT', reason=ResponseError('wrong number of arguments'))
 FailedTest(name='expireat with NX / XX', reason=ResponseError('wrong number of arguments'))
@@ -446,24 +446,13 @@ FailedTest(name='function list command', reason=ResponseError('no such subcomman
 FailedTest(name='function load command', reason=ResponseError('no such subcommand'))
 FailedTest(name='function restore command', reason=ResponseError('no such subcommand'))
 FailedTest(name='function stats command', reason=ResponseError('no such subcommand'))
-FailedTest(name='xgroup create with ENTRIESREAD', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xgroup setid with ENTRIESREAD', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='spublish command', reason=ResponseError('unknown command spublish'))
+FailedTest(name='spublish command', reason=ResponseError('unknown command `spublish`, with args beginning with: `hello`, `world`'))
 FailedTest(name='incrbyfloat command', reason='expected: 1.623, result: 1.623000')
 FailedTest(name='bitop command', reason=ResponseError('Not implemented: WRONGTYPE Operation against a key holding the wrong kind of value'))
-FailedTest(name='brpoplpush command', reason=ResponseError('unknown command brpoplpush'))
-FailedTest(name='touch command', reason=ResponseError('unknown command touch'))
-FailedTest(name='xack command', reason=ResponseError('unknown command XACK'))
-FailedTest(name='xclaim command', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xgroup create command', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xgroup create with MKSTREAM', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xgroup delconsumer command', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xgroup destroy command', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xgroup setid command', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xpending command', reason=ResponseError('unknown command xgroup'))
-FailedTest(name='xreadgroup command', reason=ResponseError('unknown command xgroup'))
+FailedTest(name='brpoplpush command', reason=ResponseError('unknown command `brpoplpush`, with args beginning with: `mylist`, `mylist1`, `0`'))
+FailedTest(name='touch command', reason=ResponseError('unknown command `touch`, with args beginning with: `not-exists`'))
 FailedTest(name='xtrim command', reason=ResponseError('value is not an integer or out of range'))
-FailedTest(name='brpoplpush with double timeout', reason=ResponseError('unknown command brpoplpush'))
+FailedTest(name='brpoplpush with double timeout', reason=ResponseError('unknown command `brpoplpush`, with args beginning with: `mylist`, `mylist1`, `3.14`'))
 FailedTest(name='zmscore command', reason="expected: ['1', '2', None], result: ['$1\\r\\n1\\r\\n', '$1\\r\\n2\\r\\n', '$-1\\r\\n']")
 FailedTest(name='zrandmember command', reason='expected: a, result: $1\r\na\r\n')
 FailedTest(name='geoadd with CH / NX / XX', reason=ResponseError('wrong number of arguments'))
@@ -480,7 +469,6 @@ FailedTest(name='flushdb with sync', reason=ResponseError('wrong number of argum
 FailedTest(name='script flush with SYNC', reason=ResponseError('Unknown SCRIPT subcommand or wrong number of arguments'))
 FailedTest(name='script flush with ASYNC', reason=ResponseError('Unknown SCRIPT subcommand or wrong number of arguments'))
 FailedTest(name='xadd with NOMKSTREAM/MINID/LIMIT', reason=ResponseError('value is not an integer or out of range'))
-FailedTest(name='xgroup createconsumer command', reason=ResponseError('unknown command xgroup'))
 FailedTest(name='xtrim command with MINID/LIMIT', reason=ResponseError('Invalid stream ID specified as stream command argument'))
 FailedTest(name='lpos with COUNT', reason="expected: [2, 6], result: ['2', '6']")
 FailedTest(name='lpos with RANK, COUNT and MAXLEN', reason="expected: [7, 6, 2], result: ['7', '6', '2']")
@@ -490,8 +478,5 @@ FailedTest(name='geopos command', reason="expected: [['13.36138933897018433', '3
 FailedTest(name='georadius with WITHCOORD / WITHDIST / WITHHASH', reason="expected: [['Palermo', ['13.36138933897018433', '38.11555639549629859']], ['Catania', ['15.08726745843887329', '37.50266842333162032']]], result: [['Palermo', ['13.361389338970184', '38.115556395496299']], ['Catania', ['15.087267458438873', '37.50266842333162']]]")
 FailedTest(name='georadius_ro with WITHCOORD / WITHDIST / WITHHASH', reason="expected: [['Palermo', ['13.36138933897018433', '38.11555639549629859']], ['Catania', ['15.08726745843887329', '37.50266842333162032']]], result: [['Palermo', ['13.361389338970184', '38.115556395496299']], ['Catania', ['15.087267458438873', '37.50266842333162']]]")
 FailedTest(name='georadiusbymember with WITHCOORD / WITHDIST / WITHHASH', reason="expected: [['Agrigento', ['13.5833314061164856', '37.31666804993816555']], ['Palermo', ['13.36138933897018433', '38.11555639549629859']]], result: [['Agrigento', ['13.583331406116486', '37.316668049938166']], ['Palermo', ['13.361389338970184', '38.115556395496299']]]")
-FailedTest(name='pfadd command', reason=ResponseError('unknown command pfadd'))
-FailedTest(name='pfcount command', reason=ResponseError('unknown command pfadd'))
-FailedTest(name='pfmerge command', reason=ResponseError('unknown command pfadd'))
 FailedTest(name='georadiusbymember_ro with WITHCOORD / WITHDIST / WITHHASH', reason="expected: [['Agrigento', ['13.5833314061164856', '37.31666804993816555']], ['Palermo', ['13.36138933897018433', '38.11555639549629859']]], result: [['Agrigento', ['13.583331406116486', '37.316668049938166']], ['Palermo', ['13.361389338970184', '38.115556395496299']]]")
 </pre>
