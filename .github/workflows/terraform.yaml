@@ -59,7 +59,7 @@ jobs:
           TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
           TF_VAR_user_name: ${{ secrets.GITHUB_USERNAME }}
           TF_VAR_user_email: ${{ secrets.GITHUB_EMAIL }}
-        run: terraform init -chdir=./Terraform/Aliyun
+        run: terraform -chdir=./Terraform/Aliyun init
 
       - name: Destroy Terraform Configuration
         env:
