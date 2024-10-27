@@ -9,6 +9,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Check GitHub Secrets
+	  run: |
+	    if [ -z "${{ secrets.MYAPP_GITHUB_TOKEN }}" ]; then
+	      echo "GitHub Token is missing"
+	    else
+	      echo "GitHub Token is set"
+	    fi
+
+	    if [ -z "${{ secrets.MYAPP_USER_EMAIL }}" ]; then
+	      echo "User Email is missing"
+	    else
+	      echo "User Email is set"
+	    fi
+
+	    if [ -z "${{ secrets.MYAPP_USER_NAME }}" ]; then
+	      echo "User Name is set"
+	    else
+	      echo "User Name is set"
+	    fi
+
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -23,18 +43,18 @@ jobs:
         env:
           TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
           TF_VAR_secret_key: ${{ secrets.ALI_SECRET_KEY }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_user_name: ${{ secrets.GITHUB_USERNAME }}
-          TF_VAR_user_email: ${{ secrets.GITHUB_EMAIL }}
+          TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
+          TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
+          TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
         run: terraform -chdir=./Terraform/Aliyun init
 
       - name: Apply Terraform Configuration
         env:
           TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
           TF_VAR_secret_key: ${{ secrets.ALI_SECRET_KEY }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_user_name: ${{ secrets.GITHUB_USERNAME }}
-          TF_VAR_user_email: ${{ secrets.GITHUB_EMAIL }}
+          TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
+          TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
+          TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
         run: terraform -chdir=./Terraform/Aliyun apply -auto-approve
 
   destroy:
@@ -42,6 +62,9 @@ jobs:
     needs: deploy # 确保在 destroy 作业之前先执行 deploy
 
     steps:
+      - name: Wait for 20 minutes before destroying resources
+        run: sleep 1200 # 等待 20 分钟（1200 秒）
+        
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -51,21 +74,21 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.9.4 
+          
+      - name: Print current directory and file list
+      run: |
+      	cd ./Terraform/Aliyun
+        echo "Current directory:"
+        pwd # 打印当前目录
+        echo "Files in the current directory:"
+        ls -al # 列出当前目录下的所有文件
 
-      - name: Initialize Terraform for Destroy
-        env:
-          TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
-          TF_VAR_secret_key: ${{ secrets.ALI_SECRET_KEY }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_user_name: ${{ secrets.GITHUB_USERNAME }}
-          TF_VAR_user_email: ${{ secrets.GITHUB_EMAIL }}
-        run: terraform -chdir=./Terraform/Aliyun init
 
       - name: Destroy Terraform Configuration
         env:
           TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
           TF_VAR_secret_key: ${{ secrets.ALI_SECRET_KEY }}
-          TF_VAR_github_token: ${{ secrets.GITHUB_TOKEN }}
-          TF_VAR_user_name: ${{ secrets.GITHUB_USERNAME }}
-          TF_VAR_user_email: ${{ secrets.GITHUB_EMAIL }}
+          TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
+          TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
+          TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
         run: terraform -chdir=./Terraform/Aliyun destroy -auto-approve
