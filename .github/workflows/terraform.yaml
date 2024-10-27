@@ -2,8 +2,8 @@ name: Daily Terraform Deployment
 
 on:
   schedule:
-    - cron: '00 6 * * *' # 使用 UTC 时间，这里 18 点对应中国时间的 2 点,先在一点进行测试
-    - cron: '30 6 * * *' 
+    - cron: '35 6 * * *' # 使用 UTC 时间，这里 18 点对应中国时间的 2 点,先在一点进行测试
+    - cron: '05 7 * * *' 
 
 jobs:
   deploy:
