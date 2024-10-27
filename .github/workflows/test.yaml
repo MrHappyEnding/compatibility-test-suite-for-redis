@@ -39,6 +39,14 @@ jobs:
         with:
           terraform_version: 1.9.4 
 
+      - name: Cache Terraform files
+        uses: actions/cache@v3
+        with:
+          path: |
+            .terraform
+            .terraform.lock.hcl
+          key: terraform-${{ hashFiles('**/*.tf') }}
+          
       - name: Initialize Terraform
         env:
           TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
@@ -46,7 +54,7 @@ jobs:
           TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
           TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
           TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
-        run: terraform -chdir=./Terraform/Aliyun init
+        run: terraform -chdir=./Terraform/Test init
 
       - name: Apply Terraform Configuration
         env:
@@ -55,7 +63,7 @@ jobs:
           TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
           TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
           TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
-        run: terraform -chdir=./Terraform/Aliyun apply -auto-approve
+        run: terraform -chdir=./Terraform/Test apply -auto-approve
 
   destroy:
     runs-on: ubuntu-latest
@@ -81,8 +89,18 @@ jobs:
           echo "Current directory:"
           pwd # 打印当前目录
           echo "Files in the current directory:"
-          ls -al # 列出当前目录下的所有文件
+          ls  # 列出当前目录下的所有文件
 
+      - name: Restore Terraform cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            .terraform
+            .terraform.lock.hcl
+          key: terraform-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            terraform-
+            
       - name: Initialize Terraform
         env:
           TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
@@ -90,7 +108,7 @@ jobs:
           TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
           TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
           TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
-        run: terraform -chdir=./Terraform/Aliyun init
+        run: terraform -chdir=./Terraform/Test init
         
       - name: Destroy Terraform Configuration
         env:
@@ -99,5 +117,5 @@ jobs:
           TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
           TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
           TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
-        run: terraform -chdir=./Terraform/Aliyun destroy -auto-approve
+        run: terraform -chdir=./Terraform/Test destroy -auto-approve
 
