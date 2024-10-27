@@ -83,6 +83,15 @@ jobs:
           echo "Files in the current directory:"
           ls -al # 列出当前目录下的所有文件
 
+      - name: Initialize Terraform
+        env:
+          TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
+          TF_VAR_secret_key: ${{ secrets.ALI_SECRET_KEY }}
+          TF_VAR_github_token: ${{ secrets.MYAPP_GITHUB_TOKEN }}
+          TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
+          TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
+        run: terraform -chdir=./Terraform/Aliyun init
+        
       - name: Destroy Terraform Configuration
         env:
           TF_VAR_access_key: ${{ secrets.ALI_ACCESS_KEY }}
