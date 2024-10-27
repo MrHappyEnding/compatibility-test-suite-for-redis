@@ -1,4 +1,4 @@
-name: Daily Terraform Deployment
+name: Test destroy
 
 on:
   push:
@@ -71,7 +71,7 @@ jobs:
 
     steps:
       - name: Wait for 20 minutes before destroying resources
-        run: sleep 1200 # 等待 20 分钟（1200 秒）
+        run: sleep 180 # 等待 3 分钟
         
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -85,7 +85,7 @@ jobs:
           
       - name: Print current directory and file list
         run: |
-          cd ./Terraform/Aliyun
+          cd ./Terraform/Test
           echo "Current directory:"
           pwd # 打印当前目录
           echo "Files in the current directory:"
