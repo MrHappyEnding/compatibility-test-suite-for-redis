@@ -64,6 +64,14 @@ jobs:
           TF_VAR_user_name: ${{ secrets.MYAPP_USER_NAME }}
           TF_VAR_user_email: ${{ secrets.MYAPP_USER_EMAIL }}
         run: terraform -chdir=./Terraform/Test apply -auto-approve
+        
+      - name: Print current directory and file list
+        run: |
+          cd ./Terraform/Test
+          echo "Current directory:"
+          pwd # 打印当前目录
+          echo "Files in the current directory:"
+          ls  # 列出当前目录下的所有文件
 
   destroy:
     runs-on: ubuntu-latest
